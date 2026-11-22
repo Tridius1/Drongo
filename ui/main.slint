@@ -1,0 +1,44 @@
+
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { ConversionItem } from "conversion-item.slint";
+
+export component MainWindow inherits Window {
+    title: "Drongo";
+
+    background: #1c1c1c;
+
+    preferred-width: 800px;
+    preferred-height: 600px;
+
+    VerticalLayout {
+        spacing: 8px;
+        padding: 8px;
+        alignment: start;
+
+        // Title bar
+        HorizontalBox {
+            height: 48px;
+            alignment: center;
+
+            Text {
+                text: "Drongo";
+                font-size: 24px;
+                vertical-alignment: center;
+            }
+
+            Rectangle {
+                horizontal-stretch: 1;
+                background: transparent;
+            }
+        }
+
+        // Conversion list
+        VerticalBox {
+            spacing: 8px;
+
+            ConversionItem {}
+            ConversionItem {}
+            ConversionItem {}
+        }
+    }
+}

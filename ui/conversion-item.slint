@@ -1,0 +1,87 @@
+
+import { ComboBox, Button } from "std-widgets.slint";
+
+export component ConversionItem inherits Rectangle {
+    height: 90px;
+    background: #1b2026;
+    border-radius: 6px;
+
+    // Current selections
+    private property <string> selected-format: "MP4";
+    private property <string> selected-codec: "H.264";
+
+    HorizontalLayout {
+        padding: 12px;
+        spacing: 16px;
+        alignment: space-between;
+
+        // Input information (left)
+        VerticalLayout {
+            horizontal-stretch: 1;
+            alignment: center;
+
+            Text {
+                text: "Input File";
+                font-size: 12px;
+                color: #666666;
+                horizontal-alignment: left;
+            }
+
+            Text {
+                text: "example.mp4";
+                font-size: 16px;
+                color: white;
+                horizontal-alignment: left;
+            }
+        }
+
+        // Output settings (right)
+        HorizontalLayout {
+            spacing: 12px;
+            alignment: end;
+
+            // Output format dropdown
+            VerticalLayout {
+                alignment: center;
+                spacing: 4px;
+
+                Text {
+                    text: "Output Format";
+                    font-size: 12px;
+                    color: #666666;
+                }
+
+                ComboBox {
+                    model: ["MP4", "MKV", "MP3", "WAV", "JPEG", "PNG"];
+                    current-value <=> root.selected-format;
+                }
+            }
+
+            // Codec dropdown (only for applicable formats)
+            if root.selected-format == "MP4"
+                || root.selected-format == "MKV" : VerticalLayout {
+                    alignment: center;
+                    spacing: 4px;
+
+                    Text {
+                        text: "Codec";
+                        font-size: 12px;
+                        color: #666666;
+                    }
+
+                    ComboBox {
+                        model: ["H.264", "H.265", "AV1"];
+                        current-value <=> root.selected-codec;
+                    }
+                }
+        }
+
+        // Convert button placeholder
+        Button {
+            text: "Convert";
+            clicked => {
+                // Conversion logic will go here
+            }
+        }
+    }
+}
